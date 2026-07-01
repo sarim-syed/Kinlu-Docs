@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINLU - Build Custom ML Models From Your Marketing Data</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #ffffff;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 60px;
+            background: white;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #f59e0b;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #666;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: #f59e0b;
+        }
+
+        .nav-cta {
+            background: #f59e0b;
+            color: white;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            padding: 80px 60px;
+            background: linear-gradient(135deg, #ffffff 0%, #fffbf0 100%);
+            min-height: 600px;
+        }
+
+        .hero-content h1 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-content .eyebrow {
+            color: #f59e0b;
+            font-weight: 700;
+            font-size: 12px;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        .hero-content p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 32px;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .primary-btn {
+            background: #f59e0b;
+            color: white;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 6px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: fit-content;
+            box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+        }
+
+        .primary-btn:hover {
+            background: #d97706;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(245, 158, 11, 0.3);
+        }
+
+        .btn-subtext {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .hero-image {
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #f0f0f0;
+            overflow: hidden;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Trust Bar */
+        .trust-bar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            gap: 24px;
+            padding: 40px 60px;
+            background: #f9f9f9;
+            border-top: 1px solid #f0f0f0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .trust-text {
+            font-size: 13px;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .trust-logos {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .trust-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .trust-logo-icon {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .trust-subtext {
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Section */
+        section {
+            padding: 80px 60px;
+        }
+
+        section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: #1a1a1a;
+            letter-spacing: -0.5px;
+        }
+
+        section > p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 48px;
+            max-width: 700px;
+            line-height: 1.7;
+        }
+
+        /* Problem Section */
+        .problem {
+            background: white;
+        }
+
+        .problem-content {
+            max-width: 800px;
+        }
+
+        .problem-content p {
+            margin-bottom: 20px;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background: #f9f9f9;
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .step {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .step-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            font-weight: 700;
+        }
+
+        .step h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+        }
+
+        .step p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Predictions */
+        .predictions {
+            background: white;
+        }
+
+        .predictions-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .prediction-card {
+            background: #f9f9f9;
+            padding: 32px;
+            border-radius: 8px;
+            border-left: 4px solid #f59e0b;
+            transition: all 0.3s;
+        }
+
+        .prediction-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            background: white;
+        }
+
+        .prediction-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .prediction-card p {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .prediction-example {
+            background: #fffbf0;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            color: #f59e0b;
+            font-weight: 600;
+            border-left: 3px solid #f59e0b;
+        }
+
+        /* Comparison */
+        .comparison {
+            background: #f9f9f9;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 32px;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px;
+            text-align: left;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .comparison-table th {
+            background: #f9f9f9;
+            font-weight: 700;
+            color: #1a1a1a;
+            font-size: 13px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table td {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .comparison-table .kinlu {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        .stats h2 {
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            margin-top: 48px;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: #f59e0b;
+        }
+
+        .stat-label {
+            font-size: 15px;
+            opacity: 0.9;
+            line-height: 1.5;
+        }
+
+        /* Use Cases */
+        .use-cases {
+            background: white;
+        }
+
+        .use-cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .use-case-card {
+            background: #f9f9f9;
+            padding: 32px;
+            border-radius: 8px;
+            border-top: 4px solid #f59e0b;
+            transition: all 0.3s;
+        }
+
+        .use-case-card:hover {
+            background: white;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .use-case-card h3 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .use-case-card .quote {
+            font-size: 14px;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: white;
+            border-left: 3px solid #f59e0b;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        .use-case-card .solution {
+            font-size: 13px;
+            color: #1a1a1a;
+            font-weight: 600;
+            background: #fffbf0;
+            padding: 12px;
+            border-radius: 4px;
+            line-height: 1.6;
+        }
+
+        /* Pricing */
+        .pricing {
+            background: #f9f9f9;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-top: 48px;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid #f0f0f0;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: #f59e0b;
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(245, 158, 11, 0.15);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #f59e0b;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .pricing-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .price {
+            font-size: 36px;
+            font-weight: 800;
+            color: #f59e0b;
+            margin-bottom: 8px;
+        }
+
+        .pricing-card .period {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 24px;
+        }
+
+        .pricing-card .description {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #f0f0f0;
+            line-height: 1.6;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .pricing-card li {
+            font-size: 13px;
+            color: #666;
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pricing-card li::before {
+            content: '✓';
+            color: #f59e0b;
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .pricing-card button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-card.popular button {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .pricing-card.popular button:hover {
+            background: #d97706;
+        }
+
+        .pricing-card:not(.popular) button {
+            background: #f0f0f0;
+            color: #1a1a1a;
+        }
+
+        .pricing-card:not(.popular) button:hover {
+            background: #e0e0e0;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            color: white;
+            font-size: 42px;
+        }
+
+        .final-cta p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 16px;
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .final-cta .primary-btn {
+            background: #f59e0b;
+            margin: 0 auto;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: #f59e0b;
+            margin-bottom: 12px;
+        }
+
+        .footer-brand p {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            line-height: 1.6;
+        }
+
+        .footer-section h4 {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+            color: white;
+        }
+
+        .footer-section a {
+            display: block;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            margin-bottom: 8px;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #f59e0b;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 24px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.4);
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            header {
+                padding: 16px 24px;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 40px 24px;
+                gap: 40px;
+            }
+
+            .hero-content h1 {
+                font-size: 32px;
+            }
+
+            section {
+                padding: 40px 24px;
+            }
+
+            .steps,
+            .predictions-grid,
+            .use-cases-grid,
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .trust-logos {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">KINLU</div>
+        <nav>
+            <a href="#how">How It Works</a>
+            <a href="#predictions">Use Cases</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#">Log in</a>
+            <a href="#" class="nav-cta">Sign Up — Free</a>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="eyebrow">Your Data Already Knows What To Do</div>
+            <h1>Build Custom ML Models From Your Marketing Data. No Code. No Data Scientists.</h1>
+            <p>Upload a CSV or connect Shopify, Meta Ads, or GA4 — KINLU builds production-ready machine learning models that predict churn, forecast revenue, and find your most valuable customers. What takes a data team weeks takes KINLU minutes.</p>
+            <div class="hero-cta">
+                <button class="primary-btn">Get Started Free →</button>
+                <span class="btn-subtext">No credit card required. Free forever for individual users.</span>
+            </div>
+        </div>
+        <div class="hero-image">
+            <img src="https://files.manuscdn.com/user_upload_by_module/session_file/310419663026790044/VePFrWplcPkOcchc.webp" alt="KINLU Dashboard - Mission Summary">
+        </div>
+    </section>
+
+    <!-- Trust Bar -->
+    <section class="trust-bar">
+        <span class="trust-text">Trusted by e-commerce and SaaS teams running on:</span>
+        <div class="trust-logos">
+            <div class="trust-logo">
+                <div class="trust-logo-icon">S</div>
+                Shopify
+            </div>
+            <div class="trust-logo">
+                <div class="trust-logo-icon">M</div>
+                Meta Ads
+            </div>
+            <div class="trust-logo">
+                <div class="trust-logo-icon">G</div>
+                Google Analytics
+            </div>
+            <div class="trust-logo">
+                <div class="trust-logo-icon">C</div>
+                CSV Upload
+            </div>
+        </div>
+        <span class="trust-subtext">Connect your data in 60 seconds. We handle the rest.</span>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="problem">
+        <h2>82% of Marketing Teams Can't Afford a Data Scientist. The Other 18% Wait Months for Answers.</h2>
+        <div class="problem-content">
+            <p>You're sitting on thousands of rows of customer data — orders, ad spend, sessions, conversions. You know the answers are in there. But extracting them requires Python, statistics, and weeks of work you don't have.</p>
+            <p>KINLU is the bridge. Tell it what you want to predict in plain English. It cleans your data, engineers the features, trains multiple models, picks the best one, and explains why it works — all in under 5 minutes.</p>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works" id="how">
+        <h2>From Question to Custom ML Model in 3 Steps</h2>
+        <div class="steps">
+            <div class="step">
+                <div class="step-icon">📤</div>
+                <h3>Connect Your Data</h3>
+                <p>Upload a CSV (up to 50MB) or connect Shopify, Meta Ads, or Google Analytics with one click. KINLU auto-detects your columns, data types, and quality issues.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">💬</div>
+                <h3>Ask a Question</h3>
+                <p>Type what you want to know: "Which customers are about to churn?" or "What's the lifetime value of customers from Instagram ads?" KINLU translates your question into an ML pipeline.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon">📊</div>
+                <h3>Get a Trained Model + Insights</h3>
+                <p>KINLU trains multiple algorithms, compares them, picks the winner, and explains every prediction in plain English. Download the model, export the report, or act on the insights immediately.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Predictions -->
+    <section class="predictions" id="predictions">
+        <h2>One Platform. Six Predictions That Drive Revenue.</h2>
+        <div class="predictions-grid">
+            <div class="prediction-card">
+                <h3>Churn Prediction</h3>
+                <p>Know who's leaving before they leave.</p>
+                <div class="prediction-example">147 customers have >70% churn risk this month</div>
+            </div>
+            <div class="prediction-card">
+                <h3>Customer Lifetime Value</h3>
+                <p>See which customers are worth fighting for.</p>
+                <div class="prediction-example">Top 20% of customers drive 68% of revenue</div>
+            </div>
+            <div class="prediction-card">
+                <h3>Audience Segmentation</h3>
+                <p>Find hidden groups in your customer base.</p>
+                <div class="prediction-example">5 distinct segments identified — 'Weekend Warriors' spend 3x more</div>
+            </div>
+            <div class="prediction-card">
+                <h3>Conversion Prediction</h3>
+                <p>Predict which leads will buy.</p>
+                <div class="prediction-example">Leads from organic search convert at 2.4x the rate of paid</div>
+            </div>
+            <div class="prediction-card">
+                <h3>Revenue Forecasting</h3>
+                <p>See next month's revenue before it happens.</p>
+                <div class="prediction-example">Projected Q3 revenue: $142K (±8% confidence interval)</div>
+            </div>
+            <div class="prediction-card">
+                <h3>ROI Auditing</h3>
+                <p>Know which campaigns actually make money.</p>
+                <div class="prediction-example">Campaign B has 14% higher lift than Campaign A at half the spend</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section class="comparison">
+        <h2>"Can't I Just Use ChatGPT for This?"</h2>
+        <p>You can upload a CSV to ChatGPT. You'll get a chart and a guess. KINLU gives you a production-grade ML model trained on YOUR data with statistical validation, feature importance, and predictions you can actually act on.</p>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>ChatGPT / Generic AI</th>
+                    <th class="kinlu">KINLU</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Data handling</td>
+                    <td>100MB limit, no live connections</td>
+                    <td class="kinlu">50MB CSV + Shopify, Meta, GA4 live sync</td>
+                </tr>
+                <tr>
+                    <td>Model quality</td>
+                    <td>One-shot analysis, no validation</td>
+                    <td class="kinlu">Trains 5+ algorithms, picks the best, cross-validates</td>
+                </tr>
+                <tr>
+                    <td>Explainability</td>
+                    <td>"Here's a chart"</td>
+                    <td class="kinlu">SHAP-powered: "This customer churns because X, Y, Z"</td>
+                </tr>
+                <tr>
+                    <td>Reproducibility</td>
+                    <td>Gone when you close the tab</td>
+                    <td class="kinlu">Saved models, versioned, retrainable</td>
+                </tr>
+                <tr>
+                    <td>Built for marketing</td>
+                    <td>General purpose</td>
+                    <td class="kinlu">Purpose-built for e-commerce and growth teams</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+        <h2>Built for Speed. Designed for Clarity.</h2>
+        <div class="stats-grid">
+            <div class="stat">
+                <div class="stat-number">< 5 min</div>
+                <div class="stat-label">From raw data to trained model</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">0</div>
+                <div class="stat-label">Lines of code required</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Every prediction explained</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Use Cases -->
+    <section class="use-cases">
+        <h2>Built for the People Who Actually Use the Data</h2>
+        <div class="use-cases-grid">
+            <div class="use-case-card">
+                <h3>E-Commerce Founder</h3>
+                <div class="quote">"I need to know which customers are about to stop buying so I can send them a win-back campaign before it's too late."</div>
+                <div class="solution"><strong>KINLU gives you:</strong> Churn prediction model + ranked risk list + recommended actions</div>
+            </div>
+            <div class="use-case-card">
+                <h3>Growth Marketer</h3>
+                <div class="quote">"I'm spending $20K/month on Meta Ads but I don't know which campaigns actually drive long-term value."</div>
+                <div class="solution"><strong>KINLU gives you:</strong> CLV model by acquisition channel + ROI audit + budget reallocation insights</div>
+            </div>
+            <div class="use-case-card">
+                <h3>Marketing Agency</h3>
+                <div class="quote">"My clients keep asking for 'data-driven strategy' but I don't have a data scientist on staff."</div>
+                <div class="solution"><strong>KINLU gives you:</strong> White-label ML models per client + automated reports + professional deliverables</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <h2>Start Free. Scale When You're Ready.</h2>
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <h3>Free</h3>
+                <div class="price">$0</div>
+                <div class="period">/month forever</div>
+                <div class="description">For individual marketers and small teams exploring ML</div>
+                <ul>
+                    <li>3 models/month</li>
+                    <li>CSV upload (50MB)</li>
+                    <li>Chat-based interface</li>
+                    <li>Basic EDA</li>
+                    <li>ROI auditing</li>
+                </ul>
+                <button>Get Started Free</button>
+            </div>
+            <div class="pricing-card popular">
+                <div class="pricing-badge">MOST POPULAR</div>
+                <h3>Pro</h3>
+                <div class="price">$199</div>
+                <div class="period">/month</div>
+                <div class="description">For growing brands that need live data and deeper insights</div>
+                <ul>
+                    <li>Everything in Free</li>
+                    <li>Unlimited models</li>
+                    <li>Shopify/Meta/GA4 connectors</li>
+                    <li>SHAP explainability</li>
+                    <li>Priority support</li>
+                </ul>
+                <button>Start Pro Trial</button>
+            </div>
+            <div class="pricing-card">
+                <h3>Enterprise</h3>
+                <div class="price">$499</div>
+                <div class="period">/month</div>
+                <div class="description">For large teams and agencies</div>
+                <ul>
+                    <li>Everything in Pro</li>
+                    <li>Team collaboration</li>
+                    <li>Role-based access</li>
+                    <li>Custom model templates</li>
+                    <li>Dedicated onboarding</li>
+                </ul>
+                <button>Talk to Us</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <h2>Your Data Is Already Telling a Story. Let KINLU Read It.</h2>
+        <p>Upload your first dataset and have a trained ML model in under 5 minutes. If it doesn't impress you, we'll personally help you get value from your data.</p>
+        <button class="primary-btn">Get Started Free →</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>KINLU</h3>
+                <p>The marketing intelligence platform that builds custom ML models from your data.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Product</h4>
+                <a href="#">How It Works</a>
+                <a href="#">Use Cases</a>
+                <a href="#">Pricing</a>
+            </div>
+            <div class="footer-section">
+                <h4>Company</h4>
+                <a href="#">About</a>
+                <a href="#">Blog</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+                <a href="#">Security</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2026 KINLU. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,1824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINLU Documentation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #f0f0f0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        nav a {
+            color: #1a1a1a;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        nav a:hover {
+            color: #ff6b35;
+        }
+
+        /* Sidebar Navigation */
+        .container {
+            display: flex;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sidebar {
+            width: 280px;
+            background: #f9f9f9;
+            border-right: 1px solid #f0f0f0;
+            padding: 40px 0;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
+            position: sticky;
+            top: 80px;
+        }
+
+        .sidebar-section {
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: #999;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+
+        .sidebar-link {
+            display: block;
+            padding: 10px 15px;
+            color: #666;
+            text-decoration: none;
+            font-size: 14px;
+            border-left: 3px solid transparent;
+            transition: all 0.2s;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: #ff6b35;
+            border-left-color: #ff6b35;
+            background: rgba(255, 107, 53, 0.05);
+        }
+
+        /* Main Content */
+        .content {
+            flex: 1;
+            padding: 60px 80px;
+            background: #ffffff;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #ff6b35;
+            display: inline-block;
+        }
+
+        h3 {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 16px;
+            line-height: 1.8;
+        }
+
+        .intro-text {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.8;
+        }
+
+        /* Lists */
+        ul, ol {
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        li {
+            margin-bottom: 12px;
+            color: #333;
+            font-size: 16px;
+        }
+
+        /* Cards & Boxes */
+        .card {
+            background: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 24px 0;
+            border-left: 4px solid #ff6b35;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        .card-text {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: rgba(255, 107, 53, 0.08);
+            border-left: 4px solid #ff6b35;
+            padding: 20px;
+            margin: 24px 0;
+            border-radius: 4px;
+        }
+
+        .highlight strong {
+            color: #ff6b35;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            font-size: 15px;
+        }
+
+        th {
+            background: #f9f9f9;
+            padding: 16px;
+            text-align: left;
+            font-weight: 600;
+            color: #1a1a1a;
+            border-bottom: 2px solid #ff6b35;
+        }
+
+        td {
+            padding: 16px;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+        }
+
+        tr:hover {
+            background: #f9f9f9;
+        }
+
+        /* Code Block */
+        .code-block {
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+            border-radius: 6px;
+            overflow-x: auto;
+            margin: 24px 0;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .code-block code {
+            color: #fff;
+        }
+
+        /* Step List */
+        .steps {
+            counter-reset: step-counter;
+            list-style: none;
+            margin: 30px 0;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 24px;
+            padding-left: 50px;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: #ff6b35;
+            color: white;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        /* Model Grid */
+        .model-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 30px 0;
+        }
+
+        .model-card {
+            background: #f9f9f9;
+            border: 1px solid #f0f0f0;
+            border-radius: 8px;
+            padding: 24px;
+            transition: all 0.3s;
+        }
+
+        .model-card:hover {
+            border-color: #ff6b35;
+            box-shadow: 0 8px 24px rgba(255, 107, 53, 0.12);
+        }
+
+        .model-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ff6b35;
+            margin-bottom: 12px;
+        }
+
+        .model-desc {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .model-use {
+            font-size: 13px;
+            color: #999;
+            font-style: italic;
+        }
+
+        /* FAQ */
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 20px;
+        }
+
+        .faq-question {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.2s;
+        }
+
+        .faq-question:hover {
+            color: #ff6b35;
+        }
+
+        .faq-toggle {
+            font-size: 20px;
+            color: #ff6b35;
+            transition: transform 0.3s;
+        }
+
+        .faq-toggle.open {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            display: none;
+            margin-top: 16px;
+            color: #666;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .faq-answer.open {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                max-height: none;
+                position: static;
+                border-right: none;
+                border-bottom: 1px solid #f0f0f0;
+                padding: 20px;
+            }
+
+            .content {
+                padding: 40px 20px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .model-grid {
+                grid-template-columns: 1fr;
+            }
+
+            nav {
+                gap: 20px;
+            }
+
+            .header-content {
+                padding: 15px 20px;
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: #f9f9f9;
+            border-top: 1px solid #f0f0f0;
+            padding: 40px;
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-top: 60px;
+        }
+
+        .breadcrumb {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 20px;
+        }
+
+        .breadcrumb a {
+            color: #ff6b35;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <a href="#" class="logo">KINLU Docs</a>
+            <nav>
+                <a href="#getting-started">Getting Started</a>
+                <a href="#concepts">Concepts</a>
+                <a href="#data-prep">Data Prep</a>
+                <a href="#api">API</a>
+                <a href="#faq">FAQ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Getting Started</div>
+                <a href="#" data-section="intro" class="sidebar-link active">Introduction</a>
+                <a href="#" data-section="quickstart" class="sidebar-link">Quick Start</a>
+                <a href="#" data-section="account" class="sidebar-link">Account Setup</a>
+                <a href="#" data-section="dashboard" class="sidebar-link">Dashboard</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Core Concepts</div>
+                <a href="#" data-section="models" class="sidebar-link">What is a Model?</a>
+                <a href="#" data-section="model-types" class="sidebar-link">6 Model Types</a>
+                <a href="#" data-section="shap" class="sidebar-link">SHAP Explanations</a>
+                <a href="#" data-section="security" class="sidebar-link">Security & Privacy</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Data & Models</div>
+                <a href="#" data-section="data-prep" class="sidebar-link">Data Preparation</a>
+                <a href="#" data-section="csv-format" class="sidebar-link">CSV Format</a>
+                <a href="#" data-section="building" class="sidebar-link">Building Models</a>
+                <a href="#" data-section="performance" class="sidebar-link">Performance Metrics</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Integration & API</div>
+                <a href="#" data-section="using-predictions" class="sidebar-link">Using Predictions</a>
+                <a href="#" data-section="api" class="sidebar-link">API Reference</a>
+                <a href="#" data-section="integration" class="sidebar-link">Integrations</a>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Support</div>
+                <a href="#" data-section="faq" class="sidebar-link">FAQ</a>
+                <a href="#" data-section="troubleshooting" class="sidebar-link">Troubleshooting</a>
+                <a href="#" data-section="roadmap" class="sidebar-link">Roadmap</a>
+                <a href="#" data-section="contact" class="sidebar-link">Contact</a>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content">
+            <!-- Introduction -->
+            <section id="intro" class="section active">
+                <h1>Welcome to KINLU</h1>
+                <p class="intro-text">Build production ML models from your marketing data in minutes. No code. No data scientists.</p>
+                
+                <h2>What is KINLU?</h2>
+                <p>KINLU is an AI-driven marketing intelligence platform that enables teams to build, deploy, and scale machine learning models without technical expertise. In minutes, not months.</p>
+
+                <div class="highlight">
+                    <strong>Core Promise:</strong> Take your marketing data → Get production ML models → Make better decisions → Grow revenue
+                </div>
+
+                <h3>What Can You Do?</h3>
+                <ul>
+                    <li><strong>Predict churn</strong> — Identify customers likely to leave in the next 30/60/90 days</li>
+                    <li><strong>Forecast revenue</strong> — Plan budgets and growth with confidence</li>
+                    <li><strong>Segment customers</strong> — Group customers into behavioral segments automatically</li>
+                    <li><strong>Calculate LTV</strong> — Know the lifetime value of each customer</li>
+                    <li><strong>Predict next purchase</strong> — Optimize email timing and campaigns</li>
+                    <li><strong>Recommend products</strong> — Personalize offers and cross-sell</li>
+                </ul>
+
+                <h3>Why KINLU vs Building In-House?</h3>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>In-House ML</th>
+                        <th>KINLU</th>
+                    </tr>
+                    <tr>
+                        <td>Cost</td>
+                        <td>$50K+/month</td>
+                        <td>$199/month</td>
+                    </tr>
+                    <tr>
+                        <td>Time to First Model</td>
+                        <td>6 months</td>
+                        <td>5 minutes</td>
+                    </tr>
+                    <tr>
+                        <td>Data Scientists Needed</td>
+                        <td>3-5</td>
+                        <td>0</td>
+                    </tr>
+                    <tr>
+                        <td>Maintenance Burden</td>
+                        <td>High</td>
+                        <td>Automated</td>
+                    </tr>
+                    <tr>
+                        <td>Model Explanations</td>
+                        <td>Manual</td>
+                        <td>Automatic (SHAP)</td>
+                    </tr>
+                </table>
+
+                <h3>Who is KINLU For?</h3>
+                <ul>
+                    <li>Marketing teams at SaaS companies</li>
+                    <li>E-commerce businesses</li>
+                    <li>Growth teams</li>
+                    <li>Founders who want data-driven decisions</li>
+                    <li>Anyone who needs ML but can't afford a data science team</li>
+                </ul>
+            </section>
+
+            <!-- Quick Start -->
+            <section id="quickstart" class="section">
+                <h1>Quick Start (5 Minutes)</h1>
+                <p class="intro-text">Get your first ML model running in 5 minutes. No credit card required for free tier.</p>
+
+                <ol class="steps">
+                    <li>
+                        <strong>Sign up</strong> — Create account at kinlu.ai, verify email
+                    </li>
+                    <li>
+                        <strong>Connect data</strong> — Upload CSV or connect Shopify
+                    </li>
+                    <li>
+                        <strong>Choose model</strong> — Select from 6 pre-built models
+                    </li>
+                    <li>
+                        <strong>Run prediction</strong> — KINLU builds the model automatically (2-5 min)
+                    </li>
+                    <li>
+                        <strong>Download results</strong> — Export predictions, SHAP explanations, feature importance
+                    </li>
+                </ol>
+
+                <div class="card">
+                    <div class="card-title">✓ You're Ready to Use KINLU</div>
+                    <div class="card-text">
+                        After these 5 steps, you'll have:
+                        <ul style="margin-top: 12px;">
+                            <li>A trained ML model specific to your data</li>
+                            <li>Predictions for every customer/order</li>
+                            <li>SHAP explanations showing why each prediction was made</li>
+                            <li>Feature importance ranking</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>What Happens Next?</h2>
+                <p>Use your predictions to:</p>
+                <ul>
+                    <li>Send targeted retention campaigns to high-churn customers</li>
+                    <li>Prioritize customer success efforts</li>
+                    <li>Personalize offers based on predicted behavior</li>
+                    <li>Optimize email timing and messaging</li>
+                    <li>Make data-driven business decisions</li>
+                </ul>
+            </section>
+
+            <!-- Account Setup -->
+            <section id="account" class="section">
+                <h1>Account Setup</h1>
+                <p class="intro-text">Set up your KINLU workspace in minutes.</p>
+
+                <h2>Creating Your Workspace</h2>
+                <p>KINLU supports both individual and team accounts:</p>
+                <ul>
+                    <li><strong>Individual account</strong> — For solo founders or individual users</li>
+                    <li><strong>Team account</strong> — For multiple team members with role-based access</li>
+                </ul>
+
+                <h2>Inviting Team Members</h2>
+                <p>Go to Settings → Team → Invite Member. Assign roles:</p>
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Permissions</th>
+                    </tr>
+                    <tr>
+                        <td>Admin</td>
+                        <td>Full access, manage team, billing</td>
+                    </tr>
+                    <tr>
+                        <td>Editor</td>
+                        <td>Create/edit models, view predictions</td>
+                    </tr>
+                    <tr>
+                        <td>Viewer</td>
+                        <td>View models and predictions only</td>
+                    </tr>
+                </table>
+
+                <h2>API Keys</h2>
+                <p>Generate API keys for programmatic access:</p>
+                <ol>
+                    <li>Go to Settings → API Keys</li>
+                    <li>Click "Generate New Key"</li>
+                    <li>Copy and store securely (never share publicly)</li>
+                    <li>Use in your code to fetch predictions</li>
+                </ol>
+
+                <div class="highlight">
+                    <strong>Security:</strong> Treat API keys like passwords. Rotate them every 90 days. Never commit to version control.
+                </div>
+            </section>
+
+            <!-- Dashboard Overview -->
+            <section id="dashboard" class="section">
+                <h1>Understanding the Dashboard</h1>
+                <p class="intro-text">Your command center for all KINLU operations.</p>
+
+                <h2>Main Navigation</h2>
+                <ul>
+                    <li><strong>Models</strong> — View all models, status, performance metrics</li>
+                    <li><strong>Data Sources</strong> — Connected integrations, upload history</li>
+                    <li><strong>Predictions</strong> — Browse predictions, export results</li>
+                    <li><strong>Settings</strong> — Account, team, billing, API keys</li>
+                    <li><strong>Help</strong> — Links to docs, FAQ, contact support</li>
+                </ul>
+
+                <h2>Models Section</h2>
+                <p>See all your models at a glance:</p>
+                <ul>
+                    <li>Model name and type (Churn, Revenue, etc.)</li>
+                    <li>Status (Training, Ready, Failed)</li>
+                    <li>Accuracy score</li>
+                    <li>Last updated date</li>
+                    <li>Quick actions (View, Edit, Delete, Download)</li>
+                </ul>
+
+                <h2>Key Metrics</h2>
+                <p>Dashboard shows your usage:</p>
+                <ul>
+                    <li>Models created this month</li>
+                    <li>Data uploaded (GB)</li>
+                    <li>API calls used</li>
+                    <li>Team members</li>
+                </ul>
+            </section>
+
+            <!-- What is a Model -->
+            <section id="models" class="section">
+                <h1>What is a Model?</h1>
+                <p class="intro-text">A machine learning model is a trained algorithm that makes predictions on your data.</p>
+
+                <h2>How It Works</h2>
+                <ol class="steps">
+                    <li><strong>Data Input</strong> — You provide historical data (customers, purchases, behavior)</li>
+                    <li><strong>Training</strong> — KINLU trains an ML algorithm on your data</li>
+                    <li><strong>Predictions</strong> — Model makes predictions on new customers</li>
+                    <li><strong>Explanations</strong> — SHAP shows why each prediction was made</li>
+                </ol>
+
+                <h2>Model Lifecycle</h2>
+                <ul>
+                    <li><strong>Creation</strong> — Upload data, choose model type</li>
+                    <li><strong>Training</strong> — KINLU builds the model (2-5 minutes)</li>
+                    <li><strong>Evaluation</strong> — Review accuracy, feature importance</li>
+                    <li><strong>Deployment</strong> — Use predictions in your business</li>
+                    <li><strong>Monitoring</strong> — Track performance over time</li>
+                </ul>
+
+                <h2>Performance Metrics</h2>
+                <p>KINLU shows you how good your model is:</p>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>What It Means</th>
+                        <th>Good Score</th>
+                    </tr>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td>% of correct predictions</td>
+                        <td>> 80%</td>
+                    </tr>
+                    <tr>
+                        <td>AUC-ROC</td>
+                        <td>Overall model quality (0-1)</td>
+                        <td>> 0.75</td>
+                    </tr>
+                    <tr>
+                        <td>Precision</td>
+                        <td>% of positive predictions correct</td>
+                        <td>> 75%</td>
+                    </tr>
+                    <tr>
+                        <td>Recall</td>
+                        <td>% of actual positives found</td>
+                        <td>> 70%</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- 6 Model Types -->
+            <section id="model-types" class="section">
+                <h1>The 6 Model Types</h1>
+                <p class="intro-text">KINLU Agent 1 includes 6 pre-built models for common marketing use cases.</p>
+
+                <div class="model-grid">
+                    <div class="model-card">
+                        <div class="model-name">1. Churn Prediction</div>
+                        <div class="model-desc">Identifies customers likely to leave in the next 30/60/90 days</div>
+                        <div class="model-use"><strong>Use case:</strong> Retention campaigns, customer success prioritization</div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-name">2. Revenue Forecast</div>
+                        <div class="model-desc">Predicts total revenue for next month/quarter/year</div>
+                        <div class="model-use"><strong>Use case:</strong> Budgeting, growth planning, investor reporting</div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-name">3. Customer Segmentation</div>
+                        <div class="model-desc">Groups customers into behavioral segments automatically</div>
+                        <div class="model-use"><strong>Use case:</strong> Personalized campaigns, pricing strategies</div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-name">4. Lifetime Value (LTV)</div>
+                        <div class="model-desc">Estimates total revenue each customer will generate</div>
+                        <div class="model-use"><strong>Use case:</strong> Acquisition budgeting, customer prioritization</div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-name">5. Next Purchase Prediction</div>
+                        <div class="model-desc">Forecasts when each customer will buy next</div>
+                        <div class="model-use"><strong>Use case:</strong> Email timing optimization, campaign scheduling</div>
+                    </div>
+
+                    <div class="model-card">
+                        <div class="model-name">6. Product Recommendation</div>
+                        <div class="model-desc">Suggests products each customer is most likely to buy</div>
+                        <div class="model-use"><strong>Use case:</strong> Cross-sell, upsell, personalization</div>
+                    </div>
+                </div>
+
+                <h2>Detailed Model Descriptions</h2>
+
+                <h3>Churn Prediction</h3>
+                <p><strong>What it does:</strong> Identifies customers likely to leave in the next 30/60/90 days based on their behavior.</p>
+                <p><strong>Required data:</strong> Customer ID, purchase history, engagement metrics, demographics</p>
+                <p><strong>Output:</strong> Churn probability score (0-100%), top risk factors, recommended actions</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Customer #1234 has 78% churn risk because they haven't purchased in 45 days and engagement dropped 60%"</div>
+                </div>
+
+                <h3>Revenue Forecast</h3>
+                <p><strong>What it does:</strong> Predicts total revenue for next month/quarter/year with confidence intervals.</p>
+                <p><strong>Required data:</strong> Historical revenue, seasonality, marketing spend, external factors</p>
+                <p><strong>Output:</strong> Revenue forecast with confidence intervals, trend analysis, growth rate</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Next quarter revenue: $500K (±$50K), 15% growth vs last year"</div>
+                </div>
+
+                <h3>Customer Segmentation</h3>
+                <p><strong>What it does:</strong> Groups customers into behavioral segments automatically without manual rules.</p>
+                <p><strong>Required data:</strong> Customer behavior, purchase patterns, engagement, demographics</p>
+                <p><strong>Output:</strong> Segment labels, size, characteristics, recommended messaging</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Segment A: High-value repeat buyers (40% of customers, 80% of revenue) — recommend VIP treatment"</div>
+                </div>
+
+                <h3>Lifetime Value (LTV) Prediction</h3>
+                <p><strong>What it does:</strong> Estimates total revenue each customer will generate over their lifetime.</p>
+                <p><strong>Required data:</strong> Purchase history, customer age, engagement, acquisition channel</p>
+                <p><strong>Output:</strong> LTV score, percentile ranking, acquisition cost payback period</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Customer #5678 has $8,500 LTV; acquisition cost was $50 (170x ROI)"</div>
+                </div>
+
+                <h3>Next Purchase Prediction</h3>
+                <p><strong>What it does:</strong> Forecasts when each customer will buy next with high accuracy.</p>
+                <p><strong>Required data:</strong> Purchase history, seasonality, product category, customer lifecycle</p>
+                <p><strong>Output:</strong> Days until next purchase, confidence score, recommended action date</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Customer #9012 will likely purchase in 14 days; send offer on day 10 for maximum impact"</div>
+                </div>
+
+                <h3>Product Recommendation</h3>
+                <p><strong>What it does:</strong> Suggests products each customer is most likely to buy based on behavior.</p>
+                <p><strong>Required data:</strong> Purchase history, product attributes, customer preferences</p>
+                <p><strong>Output:</strong> Ranked product recommendations, confidence scores, estimated revenue lift</p>
+                <div class="card">
+                    <div class="card-title">Example</div>
+                    <div class="card-text">"Recommend Product B to Customer #3456 (72% likelihood, $45 avg order value)"</div>
+                </div>
+            </section>
+
+            <!-- SHAP Explanations -->
+            <section id="shap" class="section">
+                <h1>SHAP Explanations</h1>
+                <p class="intro-text">Understand why each prediction was made. Build trust. Enable debugging.</p>
+
+                <h2>What is SHAP?</h2>
+                <p>SHAP stands for <strong>SHapley Additive exPlanations</strong>. It's a game-theoretic approach to explain the output of machine learning models.</p>
+
+                <p>In plain English: SHAP shows you exactly which features (data columns) influenced each prediction and by how much.</p>
+
+                <h2>Why It Matters</h2>
+                <ul>
+                    <li><strong>Builds trust</strong> — You can see exactly why the model made a prediction</li>
+                    <li><strong>Enables debugging</strong> — If a prediction seems wrong, SHAP helps you understand why</li>
+                    <li><strong>Satisfies compliance</strong> — Regulators require explainability for AI decisions</li>
+                    <li><strong>Improves data quality</strong> — SHAP reveals which features are most important</li>
+                </ul>
+
+                <h2>How to Read SHAP</h2>
+                <p>Every KINLU prediction includes SHAP explanations showing:</p>
+                <ul>
+                    <li><strong>Top features</strong> — Which data columns most influenced the prediction</li>
+                    <li><strong>Direction of impact</strong> — Did this feature increase or decrease the prediction?</li>
+                    <li><strong>Magnitude</strong> — How much did this feature influence the prediction?</li>
+                </ul>
+
+                <div class="card">
+                    <div class="card-title">SHAP Example</div>
+                    <div class="card-text">
+                        <strong>Churn Prediction for Customer #1234:</strong><br><br>
+                        Predicted churn probability: 78%<br><br>
+                        <strong>Top factors increasing churn risk:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li>No purchases in 60 days: -45 points</li>
+                            <li>Engagement dropped 70%: -30 points</li>
+                            <li>Customer age 2 years: +15 points</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>When to Use SHAP</h2>
+                <p>Always use SHAP for every prediction. It's non-negotiable for:</p>
+                <ul>
+                    <li>Regulatory compliance (GDPR, CCPA)</li>
+                    <li>Building customer trust</li>
+                    <li>Debugging model predictions</li>
+                    <li>Improving data quality</li>
+                </ul>
+            </section>
+
+            <!-- Security & Privacy -->
+            <section id="security" class="section">
+                <h1>Security & Privacy</h1>
+                <p class="intro-text">Your data is protected with enterprise-grade security.</p>
+
+                <h2>Data Encryption</h2>
+                <ul>
+                    <li><strong>At rest:</strong> AES-256 encryption</li>
+                    <li><strong>In transit:</strong> TLS 1.3</li>
+                    <li><strong>Database:</strong> Encrypted backups</li>
+                </ul>
+
+                <h2>Data Retention</h2>
+                <table>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Retention</th>
+                    </tr>
+                    <tr>
+                        <td>Free</td>
+                        <td>30 days</td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td>Unlimited</td>
+                    </tr>
+                </table>
+
+                <h2>Compliance</h2>
+                <ul>
+                    <li><strong>GDPR:</strong> Right to deletion, data portability, privacy policy</li>
+                    <li><strong>SOC 2:</strong> Audit trail, access controls, incident response</li>
+                    <li><strong>CCPA:</strong> California privacy rights</li>
+                </ul>
+
+                <h2>Your Data Ownership</h2>
+                <div class="highlight">
+                    <strong>You own all your data.</strong> KINLU never sells or shares your data with third parties. We use your data only to build and improve your models.
+                </div>
+            </section>
+
+            <!-- Data Preparation -->
+            <section id="data-prep" class="section">
+                <h1>Data Preparation</h1>
+                <p class="intro-text">Prepare your data for KINLU in 5 steps.</p>
+
+                <h2>Supported Data Sources</h2>
+                <ul>
+                    <li><strong>CSV upload</strong> — Local file upload, drag-and-drop interface</li>
+                    <li><strong>Shopify</strong> — Automatic sync of orders, customers, products</li>
+                    <li><strong>Coming soon:</strong> Google Analytics 4, Meta Ads, Klaviyo, Stripe</li>
+                </ul>
+
+                <h2>5-Step Data Preparation Process</h2>
+
+                <ol class="steps">
+                    <li>
+                        <strong>Gather Your Data</strong><br>
+                        Export customer data from your database or CRM. Include all relevant columns (purchase history, engagement, demographics). Go back 12-24 months for best results.
+                    </li>
+                    <li>
+                        <strong>Clean Your Data</strong><br>
+                        Remove duplicate rows. Remove rows with missing target variable. Standardize date formats (YYYY-MM-DD). Standardize categorical values (lowercase, no extra spaces).
+                    </li>
+                    <li>
+                        <strong>Create Target Variable</strong><br>
+                        Create the column you want to predict. For churn: "churned" (1 = churned, 0 = active). For revenue: "revenue" (total amount). For segmentation: no target needed.
+                    </li>
+                    <li>
+                        <strong>Format Your CSV</strong><br>
+                        First row = column headers. One row per customer/order. Save as .csv file (not .xlsx). Use underscores for spaces in column names.
+                    </li>
+                    <li>
+                        <strong>Upload to KINLU</strong><br>
+                        Click "New Model" → "Upload CSV". Select your file. Map columns to KINLU fields. Review data preview. Click "Create Model".
+                    </li>
+                </ol>
+            </section>
+
+            <!-- CSV Format -->
+            <section id="csv-format" class="section">
+                <h1>CSV Format Requirements</h1>
+                <p class="intro-text">Detailed specifications for uploading CSV files to KINLU.</p>
+
+                <h2>File Specifications</h2>
+                <table>
+                    <tr>
+                        <th>Specification</th>
+                        <th>Requirement</th>
+                    </tr>
+                    <tr>
+                        <td>Format</td>
+                        <td>CSV (comma-separated values)</td>
+                    </tr>
+                    <tr>
+                        <td>Encoding</td>
+                        <td>UTF-8</td>
+                    </tr>
+                    <tr>
+                        <td>Max file size</td>
+                        <td>100 MB (Free), 1 GB (Pro)</td>
+                    </tr>
+                    <tr>
+                        <td>Max rows</td>
+                        <td>1 million (Free), 10 million (Pro)</td>
+                    </tr>
+                    <tr>
+                        <td>Max columns</td>
+                        <td>50</td>
+                    </tr>
+                </table>
+
+                <h2>Column Requirements</h2>
+                <ul>
+                    <li><strong>Unique identifier:</strong> Customer ID, order ID, or transaction ID (required, no duplicates)</li>
+                    <li><strong>Target variable:</strong> The column you want to predict (e.g., "churned", "revenue")</li>
+                    <li><strong>Features:</strong> Supporting data (purchase history, engagement, demographics)</li>
+                    <li><strong>Date columns:</strong> Timestamps for time-series models (format: YYYY-MM-DD)</li>
+                </ul>
+
+                <h2>Data Types</h2>
+                <table>
+                    <tr>
+                        <th>Data Type</th>
+                        <th>Example</th>
+                        <th>Supported?</th>
+                    </tr>
+                    <tr>
+                        <td>Numeric</td>
+                        <td>42, 3.14, -100</td>
+                        <td>✓ Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Categorical</td>
+                        <td>"premium", "free", "inactive"</td>
+                        <td>✓ Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Boolean</td>
+                        <td>True/False, 1/0</td>
+                        <td>✓ Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Date</td>
+                        <td>2024-03-15</td>
+                        <td>✓ Yes</td>
+                    </tr>
+                    <tr>
+                        <td>Images</td>
+                        <td>image.jpg</td>
+                        <td>✗ No</td>
+                    </tr>
+                    <tr>
+                        <td>Free text</td>
+                        <td>"Customer feedback..."</td>
+                        <td>✗ No</td>
+                    </tr>
+                </table>
+
+                <h2>Data Quality Requirements</h2>
+                <ul>
+                    <li><strong>Missing values:</strong> Up to 30% missing data is OK; KINLU handles it</li>
+                    <li><strong>Duplicates:</strong> Remove exact duplicates before upload</li>
+                    <li><strong>Outliers:</strong> Extreme values are OK; KINLU is robust</li>
+                    <li><strong>Imbalanced classes:</strong> OK for classification (e.g., 95% non-churned, 5% churned)</li>
+                </ul>
+
+                <h2>Common Data Preparation Mistakes</h2>
+                <div class="card">
+                    <div class="card-title">❌ Mistake 1: Including Future Data</div>
+                    <div class="card-text">Don't include data from after your target date. This causes "data leakage" and inflates accuracy.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">❌ Mistake 2: Missing Target Variable</div>
+                    <div class="card-text">Every row must have a value for what you're predicting. Remove rows with null values in target column.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">❌ Mistake 3: Wrong Date Format</div>
+                    <div class="card-text">Use YYYY-MM-DD format. Don't use "Jan 1, 2024" or "01/01/2024".</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">❌ Mistake 4: Too Many Categories</div>
+                    <div class="card-text">Categorical columns with 1000+ unique values reduce model quality. Limit to top 50 categories.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">❌ Mistake 5: Mixing Units</div>
+                    <div class="card-text">If revenue column has both USD and EUR, convert to one currency first.</div>
+                </div>
+            </section>
+
+            <!-- Building Models -->
+            <section id="building" class="section">
+                <h1>Building Your First Model</h1>
+                <p class="intro-text">Step-by-step guide to creating and training your first ML model.</p>
+
+                <h2>Model Creation Workflow</h2>
+
+                <ol class="steps">
+                    <li>
+                        <strong>Choose Model Type</strong><br>
+                        Select from 6 pre-built models. Read description of what it does. See example use case and output.
+                    </li>
+                    <li>
+                        <strong>Connect Data</strong><br>
+                        Upload CSV or select Shopify. Map columns to KINLU fields. Review data preview (first 100 rows).
+                    </li>
+                    <li>
+                        <strong>Configure Model</strong><br>
+                        Set train/test split (default 80/20). Select target variable. Auto-select features or customize. Enable seasonality if needed.
+                    </li>
+                    <li>
+                        <strong>Review & Launch</strong><br>
+                        See estimated training time. Review data quality score. Click "Build Model".
+                    </li>
+                    <li>
+                        <strong>Monitor Training</strong><br>
+                        Watch real-time progress bar. See data validation checks. View feature importance preview.
+                    </li>
+                    <li>
+                        <strong>Review Results</strong><br>
+                        Check performance metrics. Review feature importance. Download predictions & explanations.
+                    </li>
+                </ol>
+
+                <h2>Configuration Options</h2>
+                <ul>
+                    <li><strong>Train/test split:</strong> Default 80/20 (80% training, 20% validation)</li>
+                    <li><strong>Target variable:</strong> The column you want to predict</li>
+                    <li><strong>Features:</strong> Auto-selected; can customize to include/exclude columns</li>
+                    <li><strong>Seasonality:</strong> Enable for revenue/time-series models</li>
+                    <li><strong>Time window:</strong> 12 months (default), can adjust</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Pro tip:</strong> Start with auto-selected features. If accuracy is low, try removing noisy columns or adding new features.
+                </div>
+            </section>
+
+            <!-- Performance Metrics -->
+            <section id="performance" class="section">
+                <h1>Understanding Performance Metrics</h1>
+                <p class="intro-text">How to evaluate if your model is good.</p>
+
+                <h2>Classification Models (Churn, Segmentation, Product Recommendation)</h2>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>What It Means</th>
+                        <th>Good Score</th>
+                    </tr>
+                    <tr>
+                        <td>Accuracy</td>
+                        <td>% of correct predictions</td>
+                        <td>> 80%</td>
+                    </tr>
+                    <tr>
+                        <td>Precision</td>
+                        <td>% of positive predictions that were correct</td>
+                        <td>> 75%</td>
+                    </tr>
+                    <tr>
+                        <td>Recall</td>
+                        <td>% of actual positives that were found</td>
+                        <td>> 70%</td>
+                    </tr>
+                    <tr>
+                        <td>AUC-ROC</td>
+                        <td>Overall model quality (0.5 = random, 1.0 = perfect)</td>
+                        <td>> 0.75</td>
+                    </tr>
+                </table>
+
+                <h2>Regression Models (Revenue Forecast, LTV, Next Purchase)</h2>
+                <table>
+                    <tr>
+                        <th>Metric</th>
+                        <th>What It Means</th>
+                        <th>Good Score</th>
+                    </tr>
+                    <tr>
+                        <td>RMSE</td>
+                        <td>Average prediction error (lower is better)</td>
+                        <td>< 10% of average</td>
+                    </tr>
+                    <tr>
+                        <td>MAE</td>
+                        <td>Mean absolute error</td>
+                        <td>< 15% of average</td>
+                    </tr>
+                    <tr>
+                        <td>R²</td>
+                        <td>% of variance explained (0 = bad, 1 = perfect)</td>
+                        <td>> 0.6</td>
+                    </tr>
+                </table>
+
+                <h2>Why Might Performance Be Low?</h2>
+                <div class="card">
+                    <div class="card-title">🔍 Debugging Low Accuracy</div>
+                    <div class="card-text">
+                        <strong>Possible causes:</strong>
+                        <ul style="margin-top: 12px;">
+                            <li>Insufficient data (need at least 500 rows; 5,000+ is better)</li>
+                            <li>Poor data quality (missing values, outliers, inconsistent formatting)</li>
+                            <li>Weak features (columns don't predict target well)</li>
+                            <li>Imbalanced target (99% of one class, 1% of another)</li>
+                            <li>Target leakage (features include info from after target date)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h2>Improving Model Accuracy</h2>
+                <ol>
+                    <li>Add more data (if possible)</li>
+                    <li>Improve data quality (fix missing values, remove outliers)</li>
+                    <li>Add better features (columns that actually predict target)</li>
+                    <li>Remove noisy columns (features with no correlation to target)</li>
+                    <li>Retrain monthly (keeps model fresh)</li>
+                </ol>
+            </section>
+
+            <!-- Using Predictions -->
+            <section id="using-predictions" class="section">
+                <h1>Using Predictions</h1>
+                <p class="intro-text">How to export, integrate, and act on your predictions.</p>
+
+                <h2>Exporting Predictions</h2>
+                <p>After your model is trained, download predictions in multiple formats:</p>
+                <ul>
+                    <li><strong>Predictions CSV</strong> — Customer ID + prediction score + confidence</li>
+                    <li><strong>SHAP Explanations</strong> — Feature importance for each prediction</li>
+                    <li><strong>Feature Importance</strong> — Global ranking of most important features</li>
+                    <li><strong>Model Report</strong> — PDF with metrics, charts, recommendations</li>
+                </ul>
+
+                <h2>Integration Options</h2>
+                <h3>Option 1: Download CSV</h3>
+                <p>Click "Download Predictions". Get CSV with customer ID, prediction score, confidence. Import into your CRM, email platform, or analytics tool.</p>
+
+                <h3>Option 2: API Integration (Pro tier)</h3>
+                <p>Use KINLU API to fetch predictions programmatically. Real-time predictions as new data arrives. Webhook notifications when predictions change.</p>
+
+                <h3>Option 3: Zapier Integration (Coming Soon)</h3>
+                <p>Connect KINLU to 1000+ apps (Slack, HubSpot, Klaviyo, etc.). Automate workflows based on predictions.</p>
+
+                <h2>Taking Action on Predictions</h2>
+
+                <h3>Churn Prediction</h3>
+                <ul>
+                    <li><strong>High-risk segment:</strong> Send retention offer, priority support outreach</li>
+                    <li><strong>Medium-risk segment:</strong> Send engagement email, ask for feedback</li>
+                    <li><strong>Low-risk segment:</strong> Standard marketing campaigns</li>
+                </ul>
+
+                <h3>Revenue Forecast</h3>
+                <ul>
+                    <li><strong>Upside scenario:</strong> Plan hiring, inventory, marketing spend</li>
+                    <li><strong>Downside scenario:</strong> Prepare cost-cutting measures</li>
+                    <li><strong>Use case:</strong> Quarterly business planning, board reporting</li>
+                </ul>
+
+                <h3>Customer Segmentation</h3>
+                <ul>
+                    <li><strong>Segment A (High-value):</strong> VIP treatment, exclusive offers, dedicated support</li>
+                    <li><strong>Segment B (Growing):</strong> Upsell campaigns, loyalty programs</li>
+                    <li><strong>Segment C (At-risk):</strong> Win-back offers, feedback surveys</li>
+                </ul>
+
+                <h3>LTV Prediction</h3>
+                <ul>
+                    <li><strong>High LTV:</strong> Invest in acquisition, premium onboarding</li>
+                    <li><strong>Medium LTV:</strong> Standard marketing, nurture campaigns</li>
+                    <li><strong>Low LTV:</strong> Cost-effective acquisition, self-serve onboarding</li>
+                </ul>
+
+                <h3>Next Purchase Prediction</h3>
+                <ul>
+                    <li><strong>Predicted purchase in 7 days:</strong> Send targeted offer on day 5</li>
+                    <li><strong>Predicted purchase in 30 days:</strong> Add to nurture sequence</li>
+                    <li><strong>No predicted purchase:</strong> Trigger re-engagement campaign</li>
+                </ul>
+
+                <h3>Product Recommendation</h3>
+                <ul>
+                    <li><strong>Homepage personalization:</strong> Show recommended products to each visitor</li>
+                    <li><strong>Email campaigns:</strong> Include recommended products in newsletters</li>
+                    <li><strong>Post-purchase:</strong> Recommend complementary products in thank-you email</li>
+                </ul>
+
+                <h2>Measuring Impact</h2>
+                <p>To measure ROI from KINLU predictions:</p>
+                <ol>
+                    <li><strong>Define baseline:</strong> Performance before using KINLU</li>
+                    <li><strong>Create treatment group:</strong> Customers who received KINLU-based campaigns</li>
+                    <li><strong>Create control group:</strong> Customers who received standard campaigns</li>
+                    <li><strong>Track metrics:</strong> Conversion rate, AOV, retention, revenue per customer</li>
+                    <li><strong>Calculate lift:</strong> Expected 15-25% improvement in key metrics</li>
+                </ol>
+            </section>
+
+            <!-- API Reference -->
+            <section id="api" class="section">
+                <h1>API Reference</h1>
+                <p class="intro-text">Programmatic access to KINLU models and predictions.</p>
+
+                <h2>Authentication</h2>
+                <p>All API requests require an API key in the Authorization header:</p>
+                <div class="code-block">
+<code>Authorization: Bearer YOUR_API_KEY</code>
+                </div>
+
+                <p>Generate API keys in Settings → API Keys. Treat them like passwords — never share publicly.</p>
+
+                <h2>Rate Limits</h2>
+                <table>
+                    <tr>
+                        <th>Tier</th>
+                        <th>Rate Limit</th>
+                    </tr>
+                    <tr>
+                        <td>Free</td>
+                        <td>Not available</td>
+                    </tr>
+                    <tr>
+                        <td>Pro</td>
+                        <td>1,000 requests/minute</td>
+                    </tr>
+                </table>
+
+                <h2>Base URL</h2>
+                <div class="code-block">
+<code>https://api.kinlu.ai/v1</code>
+                </div>
+
+                <h2>Core Endpoints</h2>
+
+                <h3>Create Model</h3>
+                <div class="code-block">
+<code>POST /models
+{
+  "name": "Churn Prediction Q1",
+  "type": "churn",
+  "data_source": "csv",
+  "csv_url": "https://...",
+  "target_column": "churned",
+  "features": ["days_since_purchase", "engagement_score"]
+}</code>
+                </div>
+
+                <h3>Get Model Status</h3>
+                <div class="code-block">
+<code>GET /models/{model_id}
+Returns: status, accuracy, feature_importance, training_progress</code>
+                </div>
+
+                <h3>Get Predictions</h3>
+                <div class="code-block">
+<code>GET /models/{model_id}/predictions?customer_id=123
+Returns: prediction_score, confidence, shap_explanation</code>
+                </div>
+
+                <h3>List All Models</h3>
+                <div class="code-block">
+<code>GET /models
+Returns: array of all models with metadata</code>
+                </div>
+
+                <h3>Delete Model</h3>
+                <div class="code-block">
+<code>DELETE /models/{model_id}</code>
+                </div>
+
+                <h2>Response Format</h2>
+                <div class="code-block">
+<code>{
+  "status": "success",
+  "data": {
+    "model_id": "model_abc123",
+    "prediction": 0.78,
+    "confidence": 0.92,
+    "explanation": {
+      "top_features": [
+        {"name": "days_since_purchase", "impact": -45},
+        {"name": "engagement_score", "impact": -30}
+      ]
+    }
+  }
+}</code>
+                </div>
+
+                <h2>Error Handling</h2>
+                <table>
+                    <tr>
+                        <th>Status Code</th>
+                        <th>Meaning</th>
+                    </tr>
+                    <tr>
+                        <td>400</td>
+                        <td>Bad Request — Invalid parameters</td>
+                    </tr>
+                    <tr>
+                        <td>401</td>
+                        <td>Unauthorized — Invalid API key</td>
+                    </tr>
+                    <tr>
+                        <td>404</td>
+                        <td>Not Found — Model doesn't exist</td>
+                    </tr>
+                    <tr>
+                        <td>429</td>
+                        <td>Too Many Requests — Rate limit exceeded</td>
+                    </tr>
+                    <tr>
+                        <td>500</td>
+                        <td>Server Error — Contact support</td>
+                    </tr>
+                </table>
+            </section>
+
+            <!-- Integrations -->
+            <section id="integration" class="section">
+                <h1>Integrations</h1>
+                <p class="intro-text">Connect KINLU to your favorite tools.</p>
+
+                <h2>Currently Supported</h2>
+                <ul>
+                    <li><strong>Shopify:</strong> Automatic sync of orders, customers, products</li>
+                    <li><strong>CSV Upload:</strong> Upload data files directly</li>
+                </ul>
+
+                <h2>Coming Soon</h2>
+                <ul>
+                    <li><strong>Google Analytics 4:</strong> Sync website behavior data</li>
+                    <li><strong>Meta Ads:</strong> Sync campaign performance</li>
+                    <li><strong>Klaviyo:</strong> Sync email engagement</li>
+                    <li><strong>Stripe:</strong> Sync payment data</li>
+                    <li><strong>Zapier:</strong> Connect to 1000+ apps</li>
+                </ul>
+
+                <h2>Shopify Integration</h2>
+                <p>Connect your Shopify store to KINLU in 2 minutes:</p>
+                <ol>
+                    <li>Go to Data Sources → Connect Shopify</li>
+                    <li>Click "Authorize" and log in to your Shopify account</li>
+                    <li>KINLU automatically syncs your orders, customers, and products</li>
+                    <li>Build models using Shopify data</li>
+                </ol>
+
+                <div class="highlight">
+                    <strong>What gets synced?</strong> Orders, customers, products, collections, and customer tags. KINLU respects your Shopify data privacy settings.
+                </div>
+            </section>
+
+            <!-- FAQ -->
+            <section id="faq" class="section">
+                <h1>Frequently Asked Questions</h1>
+                <p class="intro-text">Answers to common questions about KINLU.</p>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How long does it take to build a model?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">2-5 minutes for most models. Larger datasets (1M+ rows) may take 10-15 minutes.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How much historical data do I need?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Minimum 500 rows; 5,000+ rows recommended for best accuracy.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I use data from multiple sources?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Not yet. Agent 2 (coming Q2 2024) will support multi-source data fusion (CSV + Shopify + GA4 + Meta + Klaviyo).</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>How often should I retrain my model?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Monthly for seasonal models; quarterly for others. KINLU will notify you when accuracy drops.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I export my data?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Yes. Download predictions as CSV anytime. Pro tier has unlimited data retention.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Is my data secure?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Yes. All data encrypted at rest (AES-256) and in transit (TLS 1.3). SOC 2 certified.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>My CSV won't upload. What's wrong?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Check file size (max 100 MB), encoding (UTF-8), and format (.csv not .xlsx).</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>I'm getting "Missing target variable" error.</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Ensure every row has a value for the column you're predicting. Remove rows with null values in target column.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>My model accuracy is very low. Why?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Possible causes: (1) Insufficient data, (2) Poor data quality, (3) Weak features, (4) Imbalanced target. See "Improving Model Performance" section.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>What's the difference between Free and Pro?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Free: 3 models/month, CSV only, 30-day retention. Pro: Unlimited models, all data sources, unlimited retention, API access, SHAP explanations, priority support.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I downgrade from Pro to Free?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Yes, anytime. Your data is preserved for 30 days.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Do you offer annual billing?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Not yet. Coming Q2 2024 with 20% discount.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Can I get a custom plan?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Yes. Contact sales@kinlu.ai for enterprise pricing.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>I'm getting a "training failed" error.</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Usually due to data quality issues. Check for: (1) Missing target variable, (2) All rows identical, (3) Extreme outliers. Contact support if unsure.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>My model is stuck in "training" state.</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Refresh the page. If still stuck after 30 minutes, contact support@kinlu.ai.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>The API is returning 500 errors.</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Check your API key is valid. If errors persist, check status.kinlu.ai for incidents.</div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>I'm hitting rate limits. What do I do?</span>
+                        <span class="faq-toggle">▼</span>
+                    </div>
+                    <div class="faq-answer">Upgrade to Pro tier (1,000 req/min). For higher limits, contact sales@kinlu.ai.</div>
+                </div>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="section">
+                <h1>Troubleshooting</h1>
+                <p class="intro-text">Solutions to common issues.</p>
+
+                <h2>Data Quality Issues</h2>
+                <div class="card">
+                    <div class="card-title">Problem: Too many missing values</div>
+                    <div class="card-text">KINLU handles up to 30% missing data automatically. For more, either fill with mean/median or remove rows with missing target variable.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: Categorical columns with too many unique values</div>
+                    <div class="card-text">Limit to 50 unique values per column. Group rare categories into "Other".</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: Imbalanced target (95% vs 5%)</div>
+                    <div class="card-text">This is OK. Use AUC-ROC instead of accuracy to evaluate model quality.</div>
+                </div>
+
+                <h2>Model Performance Issues</h2>
+                <div class="card">
+                    <div class="card-title">Problem: Low accuracy</div>
+                    <div class="card-text">Try: (1) Add more data, (2) Add better features, (3) Remove noisy columns, (4) Check for data leakage, (5) Retrain with updated data.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: Model training failed</div>
+                    <div class="card-text">Check: (1) Missing target variable, (2) All rows identical, (3) Extreme outliers. Contact support if unsure.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: Model stuck in training</div>
+                    <div class="card-text">Refresh the page. If still stuck after 30 minutes, contact support@kinlu.ai.</div>
+                </div>
+
+                <h2>Integration Issues</h2>
+                <div class="card">
+                    <div class="card-title">Problem: Shopify sync not working</div>
+                    <div class="card-text">Check: (1) Shopify account is connected, (2) You have permission to access store data, (3) Try disconnecting and reconnecting.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: CSV import failed</div>
+                    <div class="card-text">Check: (1) File format is .csv (not .xlsx), (2) Encoding is UTF-8, (3) File size < 100 MB, (4) No special characters in column names.</div>
+                </div>
+
+                <h2>API Issues</h2>
+                <div class="card">
+                    <div class="card-title">Problem: 401 Unauthorized</div>
+                    <div class="card-text">Check: (1) API key is valid, (2) API key is in Authorization header, (3) API key hasn't expired.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: 429 Rate Limit Exceeded</div>
+                    <div class="card-text">Upgrade to Pro tier (1,000 req/min). For higher limits, contact sales@kinlu.ai.</div>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Problem: 500 Server Error</div>
+                    <div class="card-text">Check status.kinlu.ai for incidents. If errors persist, contact support@kinlu.ai.</div>
+                </div>
+            </section>
+
+            <!-- Roadmap -->
+            <section id="roadmap" class="section">
+                <h1>Roadmap & Future Features</h1>
+                <p class="intro-text">What's coming to KINLU.</p>
+
+                <h2>Agent 2: Proactive Intelligence (Q2 2024)</h2>
+                <ul>
+                    <li><strong>Multi-source data fusion:</strong> Combine CSV + Shopify + GA4 + Meta Ads + Klaviyo</li>
+                    <li><strong>Automated model selection:</strong> KINLU recommends best model for your data</li>
+                    <li><strong>Real-time predictions:</strong> Predictions update as new data arrives</li>
+                    <li><strong>Predictive workflows:</strong> Automatically trigger actions (email, SMS, ads)</li>
+                    <li><strong>Advanced SHAP:</strong> Interactive visualizations, counterfactual explanations</li>
+                </ul>
+
+                <h2>Agent 3: Autonomous Optimization (Q3 2024)</h2>
+                <ul>
+                    <li><strong>A/B test automation:</strong> KINLU designs and runs A/B tests automatically</li>
+                    <li><strong>Budget optimization:</strong> Allocate marketing spend across channels to maximize ROI</li>
+                    <li><strong>Offer optimization:</strong> KINLU recommends best offer for each customer</li>
+                    <li><strong>Timing optimization:</strong> Optimal time to send each message</li>
+                </ul>
+
+                <h2>Agent 4: Self-Healing Systems (Q4 2024)</h2>
+                <ul>
+                    <li><strong>Automated retraining:</strong> Models retrain automatically when accuracy drops</li>
+                    <li><strong>Anomaly detection:</strong> Alert when data quality or performance degrades</li>
+                    <li><strong>Drift detection:</strong> Detect when customer behavior changes</li>
+                    <li><strong>Continuous learning:</strong> Models improve over time</li>
+                </ul>
+
+                <h2>Coming Soon</h2>
+                <ul>
+                    <li><strong>Annual billing:</strong> 20% discount on yearly plans</li>
+                    <li><strong>Custom integrations:</strong> Connect any data source via Zapier or custom API</li>
+                    <li><strong>White-label option:</strong> Embed KINLU into your product</li>
+                    <li><strong>Compliance certifications:</strong> HIPAA, CCPA, SOC 3</li>
+                    <li><strong>Advanced security:</strong> IP whitelisting, SSO, audit logs</li>
+                </ul>
+            </section>
+
+            <!-- Contact -->
+            <section id="contact" class="section">
+                <h1>Support & Contact</h1>
+                <p class="intro-text">We're here to help.</p>
+
+                <h2>Getting Help</h2>
+                <table>
+                    <tr>
+                        <th>Channel</th>
+                        <th>Response Time</th>
+                        <th>Available For</th>
+                    </tr>
+                    <tr>
+                        <td>Email: support@kinlu.ai</td>
+                        <td>24 hours (Pro: 1 hour)</td>
+                        <td>All users</td>
+                    </tr>
+                    <tr>
+                        <td>In-app chat</td>
+                        <td>1-2 hours</td>
+                        <td>Pro tier only</td>
+                    </tr>
+                    <tr>
+                        <td>Community forum</td>
+                        <td>Community-driven</td>
+                        <td>All users</td>
+                    </tr>
+                    <tr>
+                        <td>Office hours (Zoom)</td>
+                        <td>Weekly</td>
+                        <td>Pro tier only</td>
+                    </tr>
+                </table>
+
+                <h2>Learning Resources</h2>
+                <ul>
+                    <li><strong>Video tutorials:</strong> YouTube channel with step-by-step guides</li>
+                    <li><strong>Blog:</strong> Tips, case studies, best practices</li>
+                    <li><strong>Webinars:</strong> Monthly deep-dives on specific models</li>
+                    <li><strong>Case studies:</strong> Real customer stories and results</li>
+                </ul>
+
+                <h2>Feedback & Feature Requests</h2>
+                <ul>
+                    <li><strong>Feature request form:</strong> Submit ideas for new features</li>
+                    <li><strong>Bug report form:</strong> Report issues</li>
+                    <li><strong>Product roadmap:</strong> Vote on features you want to see</li>
+                    <li><strong>User advisory board:</strong> Join for early access</li>
+                </ul>
+
+                <h2>Legal & Compliance</h2>
+                <ul>
+                    <li><strong>Terms of Service:</strong> Full legal terms</li>
+                    <li><strong>Privacy Policy:</strong> How we handle your data</li>
+                    <li><strong>Data Processing Agreement:</strong> For enterprise customers</li>
+                    <li><strong>Security whitepaper:</strong> Technical security details</li>
+                </ul>
+
+                <h2>Contact Information</h2>
+                <ul>
+                    <li><strong>Website:</strong> https://kinlu.ai</li>
+                    <li><strong>Email:</strong> hello@kinlu.ai</li>
+                    <li><strong>Twitter:</strong> @kinlu_ai</li>
+                    <li><strong>LinkedIn:</strong> linkedin.com/company/kinlu</li>
+                </ul>
+
+                <div class="highlight">
+                    <strong>Questions?</strong> We're always happy to help. Reach out to hello@kinlu.ai or use the in-app chat (Pro tier).
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 KINLU. All rights reserved. | <a href="#" style="color: #ff6b35;">Privacy Policy</a> | <a href="#" style="color: #ff6b35;">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Navigation functionality
+        document.querySelectorAll('[data-section]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Remove active class from all links and sections
+                document.querySelectorAll('[data-section]').forEach(l => l.classList.remove('active'));
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                
+                // Add active class to clicked link and corresponding section
+                link.classList.add('active');
+                const sectionId = link.getAttribute('data-section');
+                document.getElementById(sectionId).classList.add('active');
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+            });
+        });
+
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const toggle = question.querySelector('.faq-toggle');
+                
+                answer.classList.toggle('open');
+                toggle.classList.toggle('open');
+            });
+        });
+    </script>
+</body>
+</html>

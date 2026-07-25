@@ -714,6 +714,73 @@
                 grid-template-columns: 1fr;
             }
         }
+        /* FAQ Section */
+        .faq {
+            background: white;
+            padding: 100px 60px;
+        }
+        .faq h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .faq-intro {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 60px;
+        }
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .faq-item {
+            border-bottom: 1px solid #f0f0f0;
+            padding: 24px 0;
+        }
+        .faq-item:first-child {
+            padding-top: 0;
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #1a1a1a;
+            transition: color 0.3s;
+        }
+        .faq-question:hover {
+            color: #f59e0b;
+        }
+        .faq-toggle {
+            font-size: 20px;
+            color: #f59e0b;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 16px;
+        }
+        .faq-toggle.open {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            line-height: 1.8;
+            font-size: 14px;
+            margin-top: 0;
+        }
+        .faq-answer.open {
+            max-height: 500px;
+            margin-top: 16px;
+        }
+
     </style>
 </head>
 <body>
@@ -988,73 +1055,6 @@
         </div>
     </section>
 
-        /* FAQ Section */
-        .faq {
-            background: white;
-            padding: 100px 60px;
-        }
-        .faq h2 {
-            font-size: 36px;
-            font-weight: 800;
-            color: #1a1a1a;
-            margin-bottom: 12px;
-            text-align: center;
-        }
-        .faq-intro {
-            text-align: center;
-            color: #666;
-            font-size: 16px;
-            margin-bottom: 60px;
-        }
-        .faq-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        .faq-item {
-            border-bottom: 1px solid #f0f0f0;
-            padding: 24px 0;
-        }
-        .faq-item:first-child {
-            padding-top: 0;
-        }
-        .faq-question {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            user-select: none;
-            font-size: 16px;
-            font-weight: 600;
-            color: #1a1a1a;
-            transition: color 0.3s;
-        }
-        .faq-question:hover {
-            color: #f59e0b;
-        }
-        .faq-toggle {
-            font-size: 20px;
-            color: #f59e0b;
-            transition: transform 0.3s;
-            flex-shrink: 0;
-            margin-left: 16px;
-        }
-        .faq-toggle.open {
-            transform: rotate(180deg);
-        }
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            color: #666;
-            line-height: 1.8;
-            font-size: 14px;
-            margin-top: 0;
-        }
-        .faq-answer.open {
-            max-height: 500px;
-            margin-top: 16px;
-        }
-
     <!-- FAQ Section -->
     <section class="faq" id="faq">
         <h2>Frequently Asked Questions</h2>
@@ -1166,19 +1166,7 @@
         </div>
     </section>
 
-    <script>
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const toggle = question.querySelector('.faq-toggle');
-                answer.classList.toggle('open');
-                toggle.classList.toggle('open');
-            });
-        });
-    </script>
-
-        <!-- Final CTA -->
+    <!-- Final CTA -->
     <section class="final-cta">
         <h2>Your Data Is Already Telling a Story. Let KINLU Read It.</h2>
         <p>Upload your first dataset and have a trained ML model in under 5 minutes. If it doesn't impress you, we'll personally help you get value from your data.</p>
@@ -1215,5 +1203,17 @@
             © 2026 KINLU. All rights reserved.
         </div>
     </footer>
+    <script>
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const toggle = question.querySelector('.faq-toggle');
+                answer.classList.toggle('open');
+                toggle.classList.toggle('open');
+            });
+        });
+    </script>
+
 </body>
 </html>
